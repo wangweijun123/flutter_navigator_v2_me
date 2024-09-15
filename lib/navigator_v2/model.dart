@@ -15,4 +15,9 @@ class VeggieRoutePath {
   bool get isHomePage => id == null;
 
   bool get isDetailsPage => id != null;
+
+  @override
+  String toString() {
+    return 'VeggieRoutePath{id: $id, isUnknown: $isUnknown , isHomePage = $isHomePage,isDetailsPage=$isDetailsPage} ';
+  }
 }

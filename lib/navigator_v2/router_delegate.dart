@@ -6,6 +6,8 @@ import 'package:flutter_navigator_v2_me/navigator_v2/page.dart';
 import 'package:flutter_navigator_v2_me/screen/list.dart';
 import 'package:flutter_navigator_v2_me/screen/unknown.dart';
 
+import '../log_constanst.dart';
+
 class VeggieRouterDelegate extends RouterDelegate<VeggieRoutePath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<VeggieRoutePath> {
   final GlobalKey<NavigatorState> navigatorKey;
@@ -17,11 +19,14 @@ class VeggieRouterDelegate extends RouterDelegate<VeggieRoutePath>
 
   VeggieRouterDelegate() : navigatorKey = GlobalKey<NavigatorState>();
 
+  @override
   VeggieRoutePath get currentConfiguration {
-    print("currentConfiguration");
     if (show404) {
+      myPrint("currentConfiguration is unknown");
       return VeggieRoutePath.unknown();
     }
+
+    myPrint("currentConfiguration _selectedVeggie ? $_selectedVeggie");
     return _selectedVeggie == null
         ? VeggieRoutePath.home()
         : VeggieRoutePath.details(veggies.indexOf(_selectedVeggie!!));
@@ -47,7 +52,9 @@ class VeggieRouterDelegate extends RouterDelegate<VeggieRoutePath>
       key: navigatorKey,
       pages: pages,
       onPopPage: (route, result) {
-        if (!route.didPop(result)) {
+        bool flag = route.didPop(result);
+        myPrint("onPopPage ...flag = $flag");
+        if (flag!) {
           return false;
         }
 
@@ -63,7 +70,7 @@ class VeggieRouterDelegate extends RouterDelegate<VeggieRoutePath>
 
   @override
   Future<void> setNewRoutePath(VeggieRoutePath path) async {
-    print("setNewRoutePath");
+    myPrint("setNewRoutePath path = $path");
     if (path.isUnknown) {
       _selectedVeggie = null;
       show404 = true;

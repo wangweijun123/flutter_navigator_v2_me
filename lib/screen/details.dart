@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigator_v2_me/data/veggie.dart';
 
+import '../log_constanst.dart';
+
 class VeggieDetailsScreen extends StatelessWidget {
   final Veggie veggie;
 
@@ -10,8 +12,12 @@ class VeggieDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    myPrint("VeggieDetailsScreen build ...");
     return Scaffold(
-      appBar: AppBar(title: Text(veggie.name), backgroundColor: veggie.accentColor,),
+      appBar: AppBar(
+        title: Text(veggie.name),
+        backgroundColor: veggie.accentColor,
+      ),
       body: Container(
         color: veggie.accentColor,
         child: Center(
@@ -21,7 +27,8 @@ class VeggieDetailsScreen extends StatelessWidget {
             children: [
               if (veggie != null) ...[
                 Text(veggie.name, style: Theme.of(context).textTheme.headline6),
-                Text(veggie.categoryName, style: Theme.of(context).textTheme.subtitle1),
+                Text(veggie.categoryName,
+                    style: Theme.of(context).textTheme.subtitle1),
               ],
             ],
           ),

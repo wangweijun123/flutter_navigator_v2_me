@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_navigator_v2_me/log_constanst.dart';
 import 'package:flutter_navigator_v2_me/navigator_v2/model.dart';
 
 class VeggieRouteInformationParser
@@ -6,8 +7,9 @@ class VeggieRouteInformationParser
   @override
   Future<VeggieRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
-    print("parseRouteInformation");
     final uri = Uri.parse(routeInformation.location);
+    myPrint(
+        "parseRouteInformation uri = $uri, uri.pathSegments.length = ${uri.pathSegments.length}, ${uri.pathSegments}");
     // Handle '/'
     if (uri.pathSegments.length == 0) {
       return VeggieRoutePath.home();
@@ -28,7 +30,9 @@ class VeggieRouteInformationParser
 
   @override
   RouteInformation? restoreRouteInformation(VeggieRoutePath path) {
-    print("restoreRouteInformation");
+    myPrint("restoreRouteInformation path.isUnknown = ${path.isUnknown},"
+        " path.isHomePage=${path.isHomePage}, "
+        "path.isDetailsPage = ${path.isDetailsPage}, path.id=${path.id}");
     if (path.isUnknown) {
       return RouteInformation(location: '/404');
     }

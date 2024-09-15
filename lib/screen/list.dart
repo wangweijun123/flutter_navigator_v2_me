@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigator_v2_me/data/veggie.dart';
 
+import '../log_constanst.dart';
+
 class VeggiesListScreen extends StatelessWidget {
   final List<Veggie> veggies;
   final ValueChanged<Veggie> onTapped;
@@ -12,6 +14,7 @@ class VeggiesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    myPrint("VeggiesListScreen build... ");
     return Scaffold(
       appBar: AppBar(
         title: Text('水果列表'),
